@@ -24,7 +24,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Everyone has their own way of learning and expressing creativity. Maarifa's AI technology 
+            Everyone has their own way of learning and expressing creativity. Indaba's AI technology 
             and resources empower every kind of educator — and every kind of student — to learn, 
             create, and define their own success. Let's move education forward.
           </motion.p>
@@ -96,7 +96,7 @@ export default function Home() {
               Best in class. In class and beyond.
             </h3>
             <p className="mt-4 text-gray-600 dark:text-gray-400">
-              Real stories from educators and students using Maarifa.
+              Real stories from educators and students using Indaba.
             </p>
             <a
               href="/success-stories"
@@ -146,7 +146,7 @@ export default function Home() {
                 Building apps that teach life-changing skills.
               </h2>
               <p className="text-gray-600 dark:text-gray-400">
-                Learn how educators are using Maarifa's AI tools to create impactful learning experiences.
+                Learn how educators are using Indaba's AI tools to create impactful learning experiences.
               </p>
               <a href="/stories/teaching-skills" className="text-primary hover:underline">
                 Read the story <ArrowRightIcon className="ml-2 inline-block h-4 w-4" />

@@ -44,7 +44,7 @@ export default function Navigation() {
               className="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white"
             >
               <span className="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">
-                Maarifa AI
+                Indaba AI
               </span>
             </Link>
           </div>
@@ -105,7 +105,7 @@ export default function Navigation() {
           href="/"
           className="text-lg font-bold text-gray-900 dark:text-white"
         >
-          Maarifa AI
+          Indaba AI
         </Link>
         <ThemeToggle />
       </div>
@@ -134,7 +134,7 @@ export default function Navigation() {
                     href="/"
                     className="text-lg font-bold text-gray-900 dark:text-white"
                   >
-                    Maarifa AI
+                    Indaba AI
                   </Link>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
