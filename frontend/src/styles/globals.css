@@ -17,8 +17,12 @@
 }
 
 @layer base {
+  html {
+    @apply bg-background text-white antialiased;
+  }
+
   body {
-    @apply bg-[#0F1117] text-white;
+    @apply min-h-screen bg-[#0F1117] text-white;
   }
 
   h1 {
@@ -36,35 +40,31 @@
 
 @layer components {
   .card {
-    @apply bg-[#1A1D24] rounded-xl border border-[#2D3748] shadow-lg transition-all duration-200;
+    @apply rounded-lg border border-border bg-card-bg p-6 shadow-lg transition-all duration-200;
   }
 
   .card:hover {
-    @apply border-[#6D28D9];
+    @apply border-primary;
   }
 
   .button-primary {
-    @apply bg-[#6D28D9] hover:bg-[#5B21B6] text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200;
+    @apply rounded-lg bg-primary px-4 py-2 font-semibold text-white transition-colors hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
   }
 
   .button-secondary {
-    @apply bg-[#1A1D24] hover:bg-[#22252D] text-white font-semibold py-2 px-4 rounded-lg border border-[#2D3748] transition-all duration-200;
-  }
-
-  .input {
-    @apply bg-[#1A1D24] border border-[#2D3748] text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#6D28D9] focus:border-transparent transition-all duration-200;
+    @apply rounded-lg border border-border bg-card-bg px-4 py-2 font-semibold text-white transition-colors hover:bg-card-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
   }
 
   .nav-link {
-    @apply flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200;
+    @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-400 transition-colors hover:bg-card-hover hover:text-white;
   }
 
-  .nav-link-active {
-    @apply bg-[#22252D] text-white;
+  .nav-link.active {
+    @apply bg-card-hover text-white;
   }
 
-  .nav-link-inactive {
-    @apply text-gray-400 hover:text-white hover:bg-[#22252D];
+  .input {
+    @apply block w-full rounded-lg border border-border bg-card-bg px-4 py-2 text-white placeholder-gray-400 shadow-sm transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary;
   }
 
   .icon {
@@ -97,4 +97,17 @@
 
 .animate-slide-up {
   animation: slideUp 0.5s ease-out;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-card-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-border transition-colors hover:bg-primary;
 }

@@ -8,14 +8,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        'card-background': 'var(--card-background)',
-        'card-hover': 'var(--card-hover)',
-        primary: 'var(--primary)',
-        'primary-hover': 'var(--primary-hover)',
-        success: 'var(--success)',
-        warning: 'var(--warning)',
-        danger: 'var(--danger)',
+        background: '#0F1117',
+        'card-bg': '#1A1D24',
+        'card-hover': '#22252D',
+        primary: '#6D28D9',
+        'primary-hover': '#5B21B6',
+        border: '#2D3748',
+      },
+      fontFamily: {
+        sans: ['Inter var', 'sans-serif'],
       },
     },
   },
