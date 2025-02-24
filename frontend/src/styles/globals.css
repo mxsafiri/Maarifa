@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0F1117;
+  --card-background: #1A1D24;
+  --card-hover: #22252D;
+  --primary: #3B82F6;
+  --primary-hover: #2563EB;
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --text-primary: #FFFFFF;
+  --text-secondary: #94A3B8;
+  --border-color: #2D3748;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+.card {
+  @apply bg-[#1A1D24] rounded-xl border border-[#2D3748] shadow-lg transition-all duration-200;
+}
+
+.card:hover {
+  @apply bg-[#22252D] border-[#3B82F6];
+}
+
+.button-primary {
+  @apply bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200;
+}
+
+.button-secondary {
+  @apply bg-[#1A1D24] hover:bg-[#22252D] text-white font-semibold py-2 px-4 rounded-lg border border-[#2D3748] transition-all duration-200;
+}
+
+.input {
+  @apply bg-[#1A1D24] border border-[#2D3748] text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all duration-200;
+}
+
+.progress-bar {
+  @apply h-2 rounded-full bg-[#2D3748] overflow-hidden;
+}
+
+.progress-bar-fill {
+  @apply h-full bg-[#3B82F6] transition-all duration-500;
+}
+
+.status-badge {
+  @apply px-2 py-1 rounded-full text-xs font-medium;
+}
+
+.status-badge-success {
+  @apply bg-[#22C55E]/20 text-[#22C55E];
+}
+
+.status-badge-warning {
+  @apply bg-[#F59E0B]/20 text-[#F59E0B];
+}
+
+.status-badge-danger {
+  @apply bg-[#EF4444]/20 text-[#EF4444];
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}

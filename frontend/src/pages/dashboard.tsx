@@ -1,34 +1,99 @@
 import Layout from '@/components/layout/Layout'
-import { ArrowUpIcon, BookOpenIcon, UserGroupIcon, AcademicCapIcon } from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
+import {
+  UsersIcon,
+  BookOpenIcon,
+  ClockIcon,
+  ChartBarIcon,
+} from '@heroicons/react/24/outline'
 
 const stats = [
-  { id: 1, name: 'Courses Completed', stat: '8', icon: AcademicCapIcon, change: '+4.75%', changeType: 'positive' },
-  { id: 2, name: 'Learning Hours', stat: '24.5', icon: BookOpenIcon, change: '+54.02%', changeType: 'positive' },
-  { id: 3, name: 'Community Points', stat: '1,280', icon: UserGroupIcon, change: '+112.01%', changeType: 'positive' },
+  {
+    name: 'Active Students',
+    value: '248',
+    change: '+12',
+    changeType: 'increase',
+    subtext: 'new this week',
+    icon: UsersIcon,
+    iconColor: 'text-blue-500',
+  },
+  {
+    name: 'Lessons Today',
+    value: '8',
+    change: '3',
+    changeType: 'neutral',
+    subtext: 'completed',
+    icon: BookOpenIcon,
+    iconColor: 'text-green-500',
+  },
+  {
+    name: 'Average Progress',
+    value: '85%',
+    change: '+5%',
+    changeType: 'increase',
+    subtext: 'from last week',
+    icon: ChartBarIcon,
+    iconColor: 'text-yellow-500',
+  },
+  {
+    name: 'Time Engaged',
+    value: '4.2h',
+    change: '+1.1h',
+    changeType: 'increase',
+    subtext: 'Average per student',
+    icon: ClockIcon,
+    iconColor: 'text-purple-500',
+  },
 ]
 
-const recommendedCourses = [
+const recentActivities = [
   {
     id: 1,
-    title: 'Introduction to AI',
-    description: 'Learn the basics of Artificial Intelligence and Machine Learning',
-    progress: 0,
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    title: 'Colors and Shapes',
+    time: '10:00 AM',
+    students: 12,
+    completion: 85,
+    type: 'lesson',
   },
   {
     id: 2,
-    title: 'Digital Literacy',
-    description: 'Master essential digital skills for the modern world',
-    progress: 25,
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    title: 'Weekly Progress Goals Met',
+    time: '9:30 AM',
+    students: 8,
+    completion: 100,
+    type: 'achievement',
   },
   {
     id: 3,
-    title: 'Creative Problem Solving',
-    description: 'Develop critical thinking and problem-solving skills',
-    progress: 60,
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    title: 'Reading Fundamentals',
+    time: 'Yesterday',
+    students: 15,
+    completion: 92,
+    type: 'lesson',
+  },
+]
+
+const upcomingLessons = [
+  {
+    id: 1,
+    title: 'Numbers Fun',
+    time: '2:00 PM',
+    enrolled: 18,
+    subject: 'Mathematics',
+  },
+  {
+    id: 2,
+    title: 'Story Time',
+    time: '3:30 PM',
+    enrolled: 22,
+    subject: 'Language & Literacy',
+  },
+  {
+    id: 3,
+    title: 'Art Expression',
+    time: 'Tomorrow, 10:00 AM',
+    enrolled: 16,
+    subject: 'Art & Creativity',
   },
 ]
 
@@ -36,91 +101,169 @@ export default function Dashboard() {
   return (
     <Layout>
       <div className="space-y-8">
-        {/* Welcome Section */}
-        <div className="sm:flex sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Welcome back, John!</h1>
-            <p className="mt-2 text-lg text-gray-600">Continue your learning journey where you left off.</p>
-          </div>
+        {/* Header */}
+        <div>
+          <motion.h1 
+            className="text-4xl font-bold tracking-tight text-white"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Welcome Back
+          </motion.h1>
+          <motion.p 
+            className="mt-2 text-lg text-gray-400"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            Your daily overview of student progress and upcoming activities
+          </motion.p>
         </div>
 
         {/* Stats */}
-        <div>
-          <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {stats.map((item) => (
-              <motion.div
-                key={item.id}
-                className="relative overflow-hidden rounded-lg bg-white px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: item.id * 0.1 }}
-              >
-                <dt>
-                  <div className="absolute rounded-md bg-indigo-500 p-3">
-                    <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.name}
+              className="card overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <div className="p-6">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <stat.icon className={`h-6 w-6 ${stat.iconColor}`} aria-hidden="true" />
                   </div>
-                  <p className="ml-16 truncate text-sm font-medium text-gray-500">{item.name}</p>
-                </dt>
-                <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
-                  <p className="text-2xl font-semibold text-gray-900">{item.stat}</p>
-                  <p
-                    className={`ml-2 flex items-baseline text-sm font-semibold ${
-                      item.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
-                    }`}
-                  >
-                    {item.changeType === 'positive' ? (
-                      <ArrowUpIcon className="h-5 w-5 flex-shrink-0 self-center text-green-500" aria-hidden="true" />
-                    ) : null}
-                    <span className="sr-only">{item.changeType === 'positive' ? 'Increased' : 'Decreased'} by</span>
-                    {item.change}
-                  </p>
-                </dd>
-              </motion.div>
-            ))}
-          </dl>
+                  <div className="ml-4 flex-1">
+                    <div className="flex items-baseline">
+                      <p className="text-2xl font-semibold text-white">{stat.value}</p>
+                      <p className={`ml-2 text-sm font-medium ${
+                        stat.changeType === 'increase' ? 'text-green-500' : 
+                        stat.changeType === 'decrease' ? 'text-red-500' : 
+                        'text-gray-400'
+                      }`}>
+                        {stat.change}
+                      </p>
+                    </div>
+                    <p className="text-sm text-gray-400">{stat.name}</p>
+                    <p className="mt-1 text-xs text-gray-500">{stat.subtext}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Recommended Courses */}
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">Recommended for You</h2>
-          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {recommendedCourses.map((course) => (
-              <motion.div
-                key={course.id}
-                className="relative flex flex-col overflow-hidden rounded-lg bg-white shadow transition-shadow hover:shadow-lg"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: course.id * 0.1 }}
-              >
-                <div className="flex-shrink-0">
-                  <img className="h-48 w-full object-cover" src={course.image} alt="" />
-                </div>
-                <div className="flex flex-1 flex-col justify-between p-6">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-gray-900">{course.title}</h3>
-                    <p className="mt-3 text-base text-gray-500">{course.description}</p>
-                  </div>
-                  <div className="mt-6">
-                    <div className="relative">
-                      <div className="overflow-hidden rounded-full bg-gray-200">
-                        <div
-                          className="h-2 rounded-full bg-indigo-600"
-                          style={{ width: `${course.progress}%` }}
-                        />
+        {/* Recent Activities and Upcoming Lessons */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {/* Recent Activities */}
+          <motion.div
+            className="card"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <div className="p-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-medium text-white">Recent Activities</h2>
+                <button className="text-sm text-blue-500 hover:text-blue-400">View all</button>
+              </div>
+              <div className="mt-6 flow-root">
+                <ul role="list" className="-mb-8">
+                  {recentActivities.map((activity, activityIdx) => (
+                    <li key={activity.id}>
+                      <div className="relative pb-8">
+                        {activityIdx !== recentActivities.length - 1 ? (
+                          <span
+                            className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-[#2D3748]"
+                            aria-hidden="true"
+                          />
+                        ) : null}
+                        <div className="relative flex items-center space-x-3">
+                          <div>
+                            <span className={`flex h-8 w-8 items-center justify-center rounded-full ${
+                              activity.type === 'lesson' ? 'bg-blue-500/20 text-blue-500' :
+                              'bg-yellow-500/20 text-yellow-500'
+                            }`}>
+                              {activity.type === 'lesson' ? (
+                                <BookOpenIcon className="h-5 w-5" />
+                              ) : (
+                                <ChartBarIcon className="h-5 w-5" />
+                              )}
+                            </span>
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm font-medium text-white">{activity.title}</p>
+                              <p className="text-xs text-gray-500">{activity.time}</p>
+                            </div>
+                            <div className="mt-1 flex items-center space-x-4">
+                              <span className="text-xs text-gray-400">
+                                {activity.students} students
+                              </span>
+                              <div className="flex-1">
+                                <div className="progress-bar">
+                                  <div 
+                                    className="progress-bar-fill"
+                                    style={{ width: `${activity.completion}%` }}
+                                  />
+                                </div>
+                              </div>
+                              <span className="text-xs text-gray-400">
+                                {activity.completion}%
+                              </span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="mt-2 flex items-center justify-between text-sm">
-                        <p className="text-gray-500">Progress</p>
-                        <p className="font-medium text-indigo-600">{course.progress}%</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Upcoming Lessons */}
+          <motion.div
+            className="card"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <div className="p-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-medium text-white">Upcoming Lessons</h2>
+                <button className="text-sm text-blue-500 hover:text-blue-400">View all</button>
+              </div>
+              <div className="mt-6 space-y-4">
+                {upcomingLessons.map((lesson) => (
+                  <div
+                    key={lesson.id}
+                    className="flex items-center justify-between rounded-lg bg-[#22252D] p-4 transition-colors hover:bg-[#2D3748]"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className="bg-blue-500/20 text-blue-500 p-2 rounded-lg">
+                        <BookOpenIcon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-white">{lesson.title}</p>
+                        <div className="mt-1 flex items-center space-x-2 text-xs text-gray-400">
+                          <span>{lesson.time}</span>
+                          <span>•</span>
+                          <span>{lesson.enrolled} enrolled</span>
+                          <span>•</span>
+                          <span>{lesson.subject}</span>
+                        </div>
                       </div>
                     </div>
-                    <button className="mt-4 w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                      {course.progress === 0 ? 'Start Course' : 'Continue Learning'}
-                    </button>
+                    <button className="button-primary text-sm">Start</button>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </Layout>
