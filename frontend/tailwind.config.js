@@ -9,6 +9,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        background: 'var(--background)',
+        'card-bg': 'var(--card-background)',
+        'card-hover': 'var(--card-hover)',
         primary: {
           DEFAULT: '#007AFF',
           50: '#E5F2FF',
