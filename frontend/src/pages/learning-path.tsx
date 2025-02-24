@@ -15,7 +15,7 @@ const learningStats = [
     name: 'Current Level',
     value: 'Intermediate',
     icon: AcademicCapIcon,
-    iconColor: 'text-blue-500',
+    iconColor: 'text-primary',
   },
   {
     name: 'Completed Courses',
@@ -27,7 +27,7 @@ const learningStats = [
     name: 'Learning Hours',
     value: '45.5',
     icon: ClockIcon,
-    iconColor: 'text-purple-500',
+    iconColor: 'text-primary',
   },
   {
     name: 'Overall Progress',
@@ -91,7 +91,7 @@ export default function LearningPath() {
         {/* Header */}
         <div>
           <motion.h1 
-            className="text-4xl font-bold tracking-tight text-white"
+            className="text-4xl font-bold tracking-tight"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -100,141 +100,130 @@ export default function LearningPath() {
           </motion.h1>
           <motion.p 
             className="mt-2 text-lg text-gray-400"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             Track your progress and continue your learning journey
           </motion.p>
         </div>
 
-        {/* Learning Stats */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {learningStats.map((stat, index) => (
-            <motion.div
-              key={stat.name}
-              className="card overflow-hidden"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="p-6">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <stat.icon className={`h-6 w-6 ${stat.iconColor}`} aria-hidden="true" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-sm text-gray-400">{stat.name}</p>
-                    <p className="mt-1 text-xl font-semibold text-white">{stat.value}</p>
-                  </div>
+        {/* Stats */}
+        <motion.div 
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          {learningStats.map((stat) => (
+            <div key={stat.name} className="card">
+              <div className="flex items-center">
+                <div className={`rounded-lg p-2 ${stat.iconColor} bg-opacity-10`}>
+                  <stat.icon className="h-6 w-6" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm text-gray-400">{stat.name}</p>
+                  <p className="mt-1 text-xl font-semibold">{stat.value}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Current Courses */}
         <motion.div
-          className="card"
+          className="space-y-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <h2 className="text-2xl font-bold">Current Courses</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {courses.map((course) => (
+              <div key={course.id} className="card group">
+                <div className="flex h-full flex-col">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold">{course.title}</h3>
+                    <p className="mt-2 text-sm text-gray-400">{course.description}</p>
+                    <div className="mt-4 flex items-center gap-4">
+                      <div className="flex items-center text-sm text-gray-400">
+                        <ClockIcon className="mr-1.5 h-4 w-4" />
+                        {course.duration}
+                      </div>
+                      <div className="flex items-center text-sm text-gray-400">
+                        <BookOpenIcon className="mr-1.5 h-4 w-4" />
+                        {course.lessons} lessons
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    {course.status === 'locked' ? (
+                      <div className="flex items-center justify-between">
+                        <span className="flex items-center text-sm text-gray-400">
+                          <LockClosedIcon className="mr-1.5 h-4 w-4" />
+                          Locked
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-400">Progress</span>
+                          <span className="font-medium">{course.progress}%</span>
+                        </div>
+                        <div className="h-2 rounded-full bg-gray-700">
+                          <div
+                            className="h-2 rounded-full bg-primary transition-all"
+                            style={{ width: `${course.progress}%` }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Recommendations */}
+        <motion.div
+          className="space-y-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <div className="p-6">
-            <h2 className="text-lg font-medium text-white">Current Courses</h2>
-            <div className="mt-6 space-y-6">
-              {courses.map((course) => (
-                <div
-                  key={course.id}
-                  className="rounded-lg bg-[#22252D] p-6 transition-all hover:bg-[#2D3748]"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center">
-                        <h3 className="text-lg font-medium text-white">{course.title}</h3>
-                        {course.status === 'completed' && (
-                          <CheckCircleIcon className="ml-2 h-5 w-5 text-green-500" />
-                        )}
-                        {course.status === 'locked' && (
-                          <LockClosedIcon className="ml-2 h-5 w-5 text-gray-500" />
-                        )}
-                      </div>
-                      <p className="mt-1 text-sm text-gray-400">{course.description}</p>
-                      <div className="mt-4 flex items-center space-x-4 text-sm text-gray-400">
-                        <div className="flex items-center">
-                          <ClockIcon className="mr-1 h-4 w-4" />
-                          {course.duration}
-                        </div>
-                        <div className="flex items-center">
-                          <BookOpenIcon className="mr-1 h-4 w-4" />
-                          {course.lessons} lessons
-                        </div>
-                      </div>
-                    </div>
-                    {course.status !== 'locked' && (
-                      <button className="button-primary">
-                        {course.status === 'completed' ? 'Review' : 'Continue'}
-                      </button>
-                    )}
-                  </div>
-                  {course.status !== 'locked' && (
-                    <div className="mt-4">
-                      <div className="progress-bar">
-                        <div 
-                          className="progress-bar-fill"
-                          style={{ width: `${course.progress}%` }}
-                        />
-                      </div>
-                      <p className="mt-1 text-right text-sm text-gray-400">{course.progress}% Complete</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Recommended Courses */}
-        <motion.div
-          className="card"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <div className="p-6">
-            <h2 className="text-lg font-medium text-white">Recommended for You</h2>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2">
-              {recommendations.map((course) => (
-                <div
-                  key={course.id}
-                  className="group rounded-lg bg-[#22252D] p-6 transition-all hover:bg-[#2D3748]"
-                >
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="text-lg font-medium text-white">{course.title}</h3>
-                      <p className="mt-1 text-sm text-gray-400">{course.description}</p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {course.skills.map((skill) => (
-                          <span
-                            key={skill}
-                            className="rounded-full bg-blue-500/20 px-2.5 py-0.5 text-xs font-medium text-blue-500"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-sm font-medium text-green-500">{course.match}% Match</span>
+          <h2 className="text-2xl font-bold">Recommended Next Steps</h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {recommendations.map((course) => (
+              <div key={course.id} className="card group cursor-pointer">
+                <div className="flex justify-between">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold group-hover:text-primary">
+                      {course.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-400">{course.description}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {course.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="rounded-full bg-card-hover px-3 py-1 text-xs text-gray-400"
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                  <button className="mt-4 flex w-full items-center justify-center space-x-2 rounded-lg border border-[#3B82F6] bg-[#3B82F6]/10 py-2 text-sm font-medium text-[#3B82F6] transition-colors hover:bg-[#3B82F6] hover:text-white">
-                    <span>Start Learning</span>
-                    <ArrowRightIcon className="h-4 w-4" />
-                  </button>
+                  <div className="ml-4 flex flex-col items-end">
+                    <div className="rounded-full bg-primary bg-opacity-10 px-3 py-1">
+                      <span className="text-sm font-medium text-primary">
+                        {course.match}% Match
+                      </span>
+                    </div>
+                    <ArrowRightIcon className="mt-4 h-5 w-5 text-gray-400 transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>
