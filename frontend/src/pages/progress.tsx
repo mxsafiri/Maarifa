@@ -1,224 +1,215 @@
 import Layout from '@/components/layout/Layout'
 import { motion } from 'framer-motion'
 import {
-  ArrowTrendingUpIcon,
-  ClockIcon,
-  FireIcon,
-  TrophyIcon,
-  BookOpenIcon,
-  AcademicCapIcon,
   ChartBarIcon,
+  ClockIcon,
+  AcademicCapIcon,
+  TrophyIcon,
+  RocketLaunchIcon,
+  FireIcon,
+  BookOpenIcon,
 } from '@heroicons/react/24/outline'
 
-const stats = [
-  { name: 'Learning Streak', value: '15 days', icon: FireIcon, change: '+5', changeType: 'positive' },
-  { name: 'Hours Learned', value: '45.2', icon: ClockIcon, change: '+12.3', changeType: 'positive' },
-  { name: 'Skills Mastered', value: '8', icon: TrophyIcon, change: '+2', changeType: 'positive' },
-  { name: 'Course Completion', value: '85%', icon: BookOpenIcon, change: '+15%', changeType: 'positive' },
-]
-
-const skillProgress = [
-  { name: 'Digital Literacy', progress: 90, level: 'Advanced' },
-  { name: 'Machine Learning', progress: 60, level: 'Intermediate' },
-  { name: 'Problem Solving', progress: 75, level: 'Advanced' },
-  { name: 'Data Analysis', progress: 45, level: 'Beginner' },
-]
-
-const recentActivities = [
+const achievements = [
   {
     id: 1,
-    title: 'Completed "Introduction to AI" module',
-    date: '2 hours ago',
-    type: 'completion',
-    points: 100,
+    name: 'Quick Learner',
+    description: 'Completed 5 courses in one month',
+    icon: RocketLaunchIcon,
+    color: 'from-purple-500 to-indigo-500',
+    earned: true,
   },
   {
     id: 2,
-    title: 'Achieved "Quick Learner" badge',
-    date: '1 day ago',
-    type: 'achievement',
-    points: 50,
+    name: 'Coding Master',
+    description: 'Achieved 100% in all coding challenges',
+    icon: TrophyIcon,
+    color: 'from-yellow-500 to-orange-500',
+    earned: true,
   },
   {
     id: 3,
-    title: 'Started "Data Science Basics" course',
-    date: '2 days ago',
-    type: 'started',
-    points: 0,
+    name: 'Consistent Learner',
+    description: '30-day learning streak',
+    icon: FireIcon,
+    color: 'from-red-500 to-pink-500',
+    earned: false,
   },
 ]
 
-const learningInsights = [
+const courses = [
   {
-    title: 'Peak Learning Hours',
-    description: 'You learn best between 9 AM and 11 AM',
+    id: 1,
+    name: 'Python Programming',
+    progress: 85,
+    totalLessons: 24,
+    completedLessons: 20,
+    timeSpent: '45h 30m',
+    color: 'from-blue-500 to-cyan-500',
+  },
+  {
+    id: 2,
+    name: 'Machine Learning Basics',
+    progress: 60,
+    totalLessons: 32,
+    completedLessons: 19,
+    timeSpent: '28h 15m',
+    color: 'from-purple-500 to-indigo-500',
+  },
+  {
+    id: 3,
+    name: 'Web Development',
+    progress: 40,
+    totalLessons: 40,
+    completedLessons: 16,
+    timeSpent: '20h 45m',
+    color: 'from-green-500 to-emerald-500',
+  },
+]
+
+const stats = [
+  {
+    name: 'Total Learning Hours',
+    value: '94.5',
+    icon: ClockIcon,
+    color: 'from-blue-500 to-cyan-500',
+  },
+  {
+    name: 'Course Completion Rate',
+    value: '85%',
     icon: ChartBarIcon,
+    color: 'from-green-500 to-emerald-500',
   },
   {
-    title: 'Preferred Learning Style',
-    description: 'Visual and hands-on learning works best for you',
+    name: 'Current Level',
+    value: 'Advanced',
     icon: AcademicCapIcon,
-  },
-  {
-    title: 'Recommended Focus',
-    description: 'Consider spending more time on practical exercises',
-    icon: ArrowTrendingUpIcon,
+    color: 'from-purple-500 to-indigo-500',
   },
 ]
 
 export default function Progress() {
   return (
     <Layout>
-      <div className="space-y-8">
+      <div className="space-y-8 dark:bg-gray-900">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">Learning Progress</h1>
-          <p className="mt-2 text-lg text-gray-600">
-            Track your learning journey and see your growth
-          </p>
+          <motion.h1 
+            className="text-4xl font-bold tracking-tight dark:text-white"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Your Progress
+          </motion.h1>
+          <motion.p 
+            className="mt-2 text-lg text-gray-400 dark:text-gray-200"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            Track your learning journey and achievements.
+          </motion.p>
         </div>
 
         {/* Stats */}
-        <div>
-          <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((item, index) => (
-              <motion.div
-                key={item.name}
-                className="relative overflow-hidden rounded-lg bg-white px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <dt>
-                  <div className="absolute rounded-md bg-indigo-500 p-3">
-                    <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
-                  </div>
-                  <p className="ml-16 truncate text-sm font-medium text-gray-500">{item.name}</p>
-                </dt>
-                <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
-                  <p className="text-2xl font-semibold text-gray-900">{item.value}</p>
-                  <p
-                    className={`ml-2 flex items-baseline text-sm font-semibold ${
-                      item.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
-                    }`}
-                  >
-                    {item.change}
-                  </p>
-                </dd>
-              </motion.div>
-            ))}
-          </dl>
-        </div>
+        <motion.div 
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          {stats.map((stat) => (
+            <div key={stat.name} className="card dark:bg-gray-800 dark:text-white">
+              <div className="flex items-center p-6">
+                <div className={`rounded-xl bg-gradient-to-br ${stat.color} p-2 opacity-80`}>
+                  <stat.icon className="h-6 w-6 text-white" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm text-gray-400 dark:text-gray-200">{stat.name}</p>
+                  <p className="mt-1 text-2xl font-semibold">{stat.value}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
 
-        {/* Skill Progress */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <div className="rounded-lg bg-white p-6 shadow">
-            <h2 className="text-lg font-medium text-gray-900">Skill Progress</h2>
-            <div className="mt-6 space-y-6">
-              {skillProgress.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
+        {/* Course Progress */}
+        <motion.div
+          className="space-y-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <h2 className="text-2xl font-bold dark:text-white">Course Progress</h2>
+          <div className="space-y-4">
+            {courses.map((course) => (
+              <div key={course.id} className="card overflow-hidden dark:bg-gray-800 dark:text-white">
+                <div className="p-6">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">{skill.name}</p>
-                      <p className="text-sm text-gray-500">{skill.level}</p>
-                    </div>
-                    <span className="text-sm font-medium text-gray-900">{skill.progress}%</span>
+                    <h3 className="text-lg font-semibold">{course.name}</h3>
+                    <span className="text-lg font-semibold">{course.progress}%</span>
                   </div>
-                  <div className="mt-2">
-                    <div className="overflow-hidden rounded-full bg-gray-200">
+                  <div className="mt-4">
+                    <div className="h-2 rounded-full bg-gray-700 dark:bg-gray-600">
                       <div
-                        className="h-2 rounded-full bg-indigo-600"
-                        style={{ width: `${skill.progress}%` }}
+                        className={`h-2 rounded-full bg-gradient-to-r ${course.color}`}
+                        style={{ width: `${course.progress}%` }}
                       />
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Recent Activities */}
-          <div className="rounded-lg bg-white p-6 shadow">
-            <h2 className="text-lg font-medium text-gray-900">Recent Activities</h2>
-            <div className="mt-6 flow-root">
-              <ul role="list" className="-mb-8">
-                {recentActivities.map((activity, index) => (
-                  <motion.li
-                    key={activity.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <div className="relative pb-8">
-                      {index !== recentActivities.length - 1 ? (
-                        <span
-                          className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"
-                          aria-hidden="true"
-                        />
-                      ) : null}
-                      <div className="relative flex space-x-3">
-                        <div>
-                          <span
-                            className={`flex h-8 w-8 items-center justify-center rounded-full ${
-                              activity.type === 'completion'
-                                ? 'bg-green-500'
-                                : activity.type === 'achievement'
-                                ? 'bg-yellow-500'
-                                : 'bg-blue-500'
-                            } ring-8 ring-white`}
-                          >
-                            <TrophyIcon className="h-5 w-5 text-white" aria-hidden="true" />
-                          </span>
-                        </div>
-                        <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                          <div>
-                            <p className="text-sm text-gray-500">{activity.title}</p>
-                          </div>
-                          <div className="whitespace-nowrap text-right text-sm text-gray-500">
-                            <span>{activity.date}</span>
-                            {activity.points > 0 && (
-                              <span className="ml-2 text-green-600">+{activity.points} pts</span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
+                  <div className="mt-4 flex items-center justify-between text-sm text-gray-400 dark:text-gray-200">
+                    <div className="flex items-center">
+                      <BookOpenIcon className="mr-1.5 h-4 w-4" />
+                      {course.completedLessons}/{course.totalLessons} lessons
                     </div>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* AI Learning Insights */}
-        <div className="rounded-lg bg-white p-6 shadow">
-          <h2 className="text-lg font-medium text-gray-900">AI Learning Insights</h2>
-          <p className="mt-1 text-sm text-gray-500">
-            Personalized insights based on your learning patterns
-          </p>
-          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {learningInsights.map((insight, index) => (
-              <motion.div
-                key={insight.title}
-                className="rounded-lg border border-gray-200 p-6"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-50">
-                  <insight.icon className="h-6 w-6 text-indigo-600" />
+                    <div className="flex items-center">
+                      <ClockIcon className="mr-1.5 h-4 w-4" />
+                      {course.timeSpent}
+                    </div>
+                  </div>
                 </div>
-                <h3 className="mt-4 text-base font-medium text-gray-900">{insight.title}</h3>
-                <p className="mt-2 text-sm text-gray-500">{insight.description}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </div>
+        </motion.div>
+
+        {/* Achievements */}
+        <motion.div
+          className="space-y-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <h2 className="text-2xl font-bold dark:text-white">Achievements</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {achievements.map((achievement) => (
+              <div
+                key={achievement.id}
+                className={`card ${
+                  achievement.earned ? 'opacity-100' : 'opacity-50'
+                } dark:bg-gray-800 dark:text-white`}
+              >
+                <div className="p-6">
+                  <div className={`inline-flex rounded-xl bg-gradient-to-br ${achievement.color} p-2 opacity-80`}>
+                    <achievement.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold">{achievement.name}</h3>
+                  <p className="mt-2 text-sm text-gray-400 dark:text-gray-200">
+                    {achievement.description}
+                  </p>
+                  {achievement.earned && (
+                    <div className="mt-4">
+                      <span className="inline-flex items-center rounded-full bg-green-500/10 px-2 py-1 text-xs font-medium text-green-500">
+                        Earned
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </Layout>
   )
