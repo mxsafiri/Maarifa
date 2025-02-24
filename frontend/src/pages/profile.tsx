@@ -71,7 +71,7 @@ const settings = [
 export default function Profile() {
   return (
     <Layout>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 dark:bg-gray-900">
         {/* Header */}
         <div className="py-12">
           <div className="flex items-center space-x-8">
@@ -79,7 +79,7 @@ export default function Profile() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="relative h-32 w-32 overflow-hidden rounded-full bg-gray-100"
+              className="relative h-32 w-32 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800 ring-4 ring-white dark:ring-gray-700 shadow-lg"
             >
               <img
                 src="/images/profile.jpg"
@@ -89,7 +89,7 @@ export default function Profile() {
             </motion.div>
             <div>
               <motion.h1
-                className="text-4xl font-semibold"
+                className="text-4xl font-semibold text-gray-900 dark:text-white"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -97,7 +97,7 @@ export default function Profile() {
                 Sarah Johnson
               </motion.h1>
               <motion.p
-                className="mt-2 text-lg text-gray-400"
+                className="mt-2 text-lg text-gray-500 dark:text-gray-400"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -108,84 +108,54 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Achievements */}
-        <motion.div
-          className="space-y-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <h2 className="text-2xl font-semibold">Recent Achievements</h2>
-          <div className="grid gap-6 lg:grid-cols-3">
+        {/* Achievements Section */}
+        <section className="py-8">
+          <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Achievements</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {achievements.map((achievement) => (
-              <div
+              <motion.div
                 key={achievement.id}
-                className="rounded-3xl bg-gray-50 p-8 dark:bg-gray-800/50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative overflow-hidden rounded-2xl p-6 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                <div className={`inline-flex rounded-xl bg-gradient-to-br ${achievement.color} p-2 opacity-80`}>
-                  <achievement.icon className="h-6 w-6 text-white" />
+                <div className={`absolute inset-0 opacity-10 bg-gradient-to-br ${achievement.color}`} />
+                <div className="relative">
+                  <achievement.icon className={`h-8 w-8 bg-gradient-to-br ${achievement.color} rounded-lg p-1.5 text-white`} />
+                  <h3 className="mt-4 text-lg font-semibold text-gray-900 dark:text-white">{achievement.name}</h3>
+                  <p className="mt-2 text-gray-500 dark:text-gray-400">{achievement.description}</p>
+                  <p className="mt-2 text-sm text-gray-400 dark:text-gray-500">{achievement.date}</p>
                 </div>
-                <h3 className="mt-6 text-lg font-semibold">{achievement.name}</h3>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">
-                  {achievement.description}
-                </p>
-                <p className="mt-4 text-sm text-gray-400">{achievement.date}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </motion.div>
+        </section>
 
-        {/* Settings */}
-        <motion.div
-          className="mt-12 space-y-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <h2 className="text-2xl font-semibold">Settings</h2>
-          <div className="grid gap-6 lg:grid-cols-2">
+        {/* Settings Section */}
+        <section className="py-8">
+          <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Settings</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {settings.map((setting) => (
-              <a
+              <motion.a
                 key={setting.id}
                 href={setting.href}
-                className="group rounded-3xl bg-gray-50 p-8 transition hover:bg-gray-100 dark:bg-gray-800/50 dark:hover:bg-gray-700/50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="flex items-start space-x-4 rounded-2xl p-6 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
-                <div className="flex items-center space-x-4">
-                  <div className="rounded-xl bg-gray-200 p-2 dark:bg-gray-700">
-                    <setting.icon className="h-6 w-6 text-gray-600 dark:text-gray-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold group-hover:text-primary">
-                      {setting.name}
-                    </h3>
-                    <p className="mt-1 text-gray-600 dark:text-gray-400">
-                      {setting.description}
-                    </p>
-                  </div>
+                <setting.icon className="h-8 w-8 text-gray-400 dark:text-gray-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300" />
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300">
+                    {setting.name}
+                  </h3>
+                  <p className="mt-1 text-gray-500 dark:text-gray-400">{setting.description}</p>
                 </div>
-              </a>
+              </motion.a>
             ))}
           </div>
-        </motion.div>
-
-        {/* Danger Zone */}
-        <motion.div
-          className="mt-12 space-y-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <h2 className="text-2xl font-semibold text-red-500">Danger Zone</h2>
-          <div className="rounded-3xl border-2 border-red-500/20 bg-red-500/5 p-8">
-            <h3 className="text-lg font-semibold text-red-500">Delete Account</h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">
-              Once you delete your account, there is no going back. Please be certain.
-            </p>
-            <button className="mt-6 rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600">
-              Delete Account
-            </button>
-          </div>
-        </motion.div>
+        </section>
       </div>
     </Layout>
   )
