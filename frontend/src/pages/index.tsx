@@ -2,8 +2,36 @@ import Layout from '@/components/layout/Layout'
 import { motion } from 'framer-motion'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
+import { useState } from 'react'
+
+const shimmer = (w: number, h: number) => `
+<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="g">
+      <stop stop-color="#333" offset="20%" />
+      <stop stop-color="#222" offset="50%" />
+      <stop stop-color="#333" offset="70%" />
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="#333" />
+  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+</svg>`
+
+const toBase64 = (str: string) =>
+  typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str)
 
 export default function Home() {
+  const [imageError, setImageError] = useState({
+    k12: false,
+    higherEd: false,
+    success: false,
+    coding: false,
+    teaching: false,
+  })
+
   return (
     <Layout>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -40,13 +68,18 @@ export default function Home() {
         >
           {/* K-12 Card */}
           <div className="group relative overflow-hidden rounded-3xl bg-purple-100 p-8 dark:bg-purple-900/10">
-            <div className="aspect-[4/3] overflow-hidden rounded-2xl relative">
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl relative bg-gray-800">
               <Image
-                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200"
+                src={imageError.k12 
+                  ? "/images/fallback-k12.jpg" 
+                  : "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200"}
                 alt="K-12 Learning"
                 fill
                 className="object-cover transition duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                onError={() => setImageError(prev => ({ ...prev, k12: true }))}
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
               />
             </div>
             <h3 className="mt-8 text-2xl font-semibold">
@@ -65,13 +98,18 @@ export default function Home() {
 
           {/* Higher Education Card */}
           <div className="group relative overflow-hidden rounded-3xl bg-green-100 p-8 dark:bg-green-900/10">
-            <div className="aspect-[4/3] overflow-hidden rounded-2xl relative">
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl relative bg-gray-800">
               <Image
-                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200"
+                src={imageError.higherEd 
+                  ? "/images/fallback-higher-ed.jpg" 
+                  : "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200"}
                 alt="Higher Education"
                 fill
                 className="object-cover transition duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                onError={() => setImageError(prev => ({ ...prev, higherEd: true }))}
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
               />
             </div>
             <h3 className="mt-8 text-2xl font-semibold">
@@ -90,13 +128,18 @@ export default function Home() {
 
           {/* Success Stories Card */}
           <div className="group relative overflow-hidden rounded-3xl bg-blue-100 p-8 dark:bg-blue-900/10">
-            <div className="aspect-[4/3] overflow-hidden rounded-2xl relative">
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl relative bg-gray-800">
               <Image
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200"
+                src={imageError.success 
+                  ? "/images/fallback-success.jpg" 
+                  : "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200"}
                 alt="Success Stories"
                 fill
                 className="object-cover transition duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                onError={() => setImageError(prev => ({ ...prev, success: true }))}
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
               />
             </div>
             <h3 className="mt-8 text-2xl font-semibold">
@@ -122,13 +165,18 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <div className="relative overflow-hidden rounded-3xl aspect-[4/3] lg:aspect-[16/9]">
+            <div className="relative overflow-hidden rounded-3xl aspect-[4/3] lg:aspect-[16/9] bg-gray-800">
               <Image
-                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"
+                src={imageError.coding 
+                  ? "/images/fallback-coding.jpg" 
+                  : "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"}
                 alt="Student Coding"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                onError={() => setImageError(prev => ({ ...prev, coding: true }))}
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
               />
             </div>
             <div className="flex flex-col justify-center space-y-6 p-8">
@@ -161,13 +209,18 @@ export default function Home() {
                 Read the story <ArrowRightIcon className="ml-2 inline-block h-4 w-4" />
               </a>
             </div>
-            <div className="relative overflow-hidden rounded-3xl aspect-[4/3] lg:aspect-[16/9] lg:order-1">
+            <div className="relative overflow-hidden rounded-3xl aspect-[4/3] lg:aspect-[16/9] lg:order-1 bg-gray-800">
               <Image
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200"
+                src={imageError.teaching 
+                  ? "/images/fallback-teaching.jpg" 
+                  : "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200"}
                 alt="Teacher and Student"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                onError={() => setImageError(prev => ({ ...prev, teaching: true }))}
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
               />
             </div>
           </motion.div>
