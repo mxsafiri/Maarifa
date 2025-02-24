@@ -33,7 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-white text-gray-900 transition-colors dark:bg-gray-900 dark:text-white">
+      <div className="min-h-screen bg-background text-gray-900 transition-colors dark:bg-gray-900 dark:text-white">
         <Navigation />
         <motion.main
           initial={{ opacity: 0, y: 20 }}
@@ -83,7 +83,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         </button>
                       </div>
                     </Transition.Child>
-                    <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#1A1D24] px-6 pb-4">
+                    <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#1A1D24] p-6">
                       <div className="flex h-16 shrink-0 items-center">
                         <Link href="/" className="text-2xl font-bold text-white">
                           Maarifa AI
@@ -122,7 +122,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           {/* Static sidebar for desktop */}
           <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-            <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#1A1D24] px-6 pb-4">
+            <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#1A1D24] p-6">
               <div className="flex h-16 shrink-0 items-center">
                 <Link href="/" className="text-2xl font-bold text-white">
                   Maarifa AI
@@ -164,7 +164,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </button>
             </div>
 
-            <main className="py-10">
+            <main className="min-h-screen py-10">
               <div className="px-4 sm:px-6 lg:px-8">{children}</div>
             </main>
           </div>
