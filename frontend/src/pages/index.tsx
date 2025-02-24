@@ -1,6 +1,7 @@
 import Layout from '@/components/layout/Layout'
 import { motion } from 'framer-motion'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -39,11 +40,13 @@ export default function Home() {
         >
           {/* K-12 Card */}
           <div className="group relative overflow-hidden rounded-3xl bg-purple-100 p-8 dark:bg-purple-900/10">
-            <div className="aspect-[4/3] overflow-hidden rounded-2xl">
-              <img
-                src="/images/k12-learning.jpg"
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl relative">
+              <Image
+                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200"
                 alt="K-12 Learning"
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                fill
+                className="object-cover transition duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
             <h3 className="mt-8 text-2xl font-semibold">
@@ -62,11 +65,13 @@ export default function Home() {
 
           {/* Higher Education Card */}
           <div className="group relative overflow-hidden rounded-3xl bg-green-100 p-8 dark:bg-green-900/10">
-            <div className="aspect-[4/3] overflow-hidden rounded-2xl">
-              <img
-                src="/images/higher-ed.jpg"
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl relative">
+              <Image
+                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200"
                 alt="Higher Education"
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                fill
+                className="object-cover transition duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
             <h3 className="mt-8 text-2xl font-semibold">
@@ -85,11 +90,13 @@ export default function Home() {
 
           {/* Success Stories Card */}
           <div className="group relative overflow-hidden rounded-3xl bg-blue-100 p-8 dark:bg-blue-900/10">
-            <div className="aspect-[4/3] overflow-hidden rounded-2xl">
-              <img
-                src="/images/success.jpg"
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl relative">
+              <Image
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200"
                 alt="Success Stories"
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                fill
+                className="object-cover transition duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
             <h3 className="mt-8 text-2xl font-semibold">
@@ -115,11 +122,13 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <div className="relative overflow-hidden rounded-3xl">
-              <img
-                src="/images/student-coding.jpg"
+            <div className="relative overflow-hidden rounded-3xl aspect-[4/3] lg:aspect-[16/9]">
+              <Image
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"
                 alt="Student Coding"
-                className="h-full w-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
             <div className="flex flex-col justify-center space-y-6 p-8">
@@ -152,11 +161,13 @@ export default function Home() {
                 Read the story <ArrowRightIcon className="ml-2 inline-block h-4 w-4" />
               </a>
             </div>
-            <div className="relative overflow-hidden rounded-3xl lg:order-1">
-              <img
-                src="/images/teacher-student.jpg"
+            <div className="relative overflow-hidden rounded-3xl aspect-[4/3] lg:aspect-[16/9] lg:order-1">
+              <Image
+                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200"
                 alt="Teacher and Student"
-                className="h-full w-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
           </motion.div>
