@@ -71,8 +71,8 @@ export default function Home() {
             <div className="aspect-[4/3] overflow-hidden rounded-2xl relative bg-gray-800">
               <Image
                 src={imageError.k12 
-                  ? "/images/fallback-k12.jpg" 
-                  : "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200"}
+                  ? "/images/fallback-k12.svg" 
+                  : "https://images.unsplash.com/photo-1544725121-be3bf52e2dc8?q=80&w=1200"}
                 alt="K-12 Learning"
                 fill
                 className="object-cover transition duration-300 group-hover:scale-105"
@@ -101,8 +101,8 @@ export default function Home() {
             <div className="aspect-[4/3] overflow-hidden rounded-2xl relative bg-gray-800">
               <Image
                 src={imageError.higherEd 
-                  ? "/images/fallback-higher-ed.jpg" 
-                  : "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200"}
+                  ? "/images/fallback-higher-ed.svg" 
+                  : "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=1200"}
                 alt="Higher Education"
                 fill
                 className="object-cover transition duration-300 group-hover:scale-105"
@@ -131,8 +131,8 @@ export default function Home() {
             <div className="aspect-[4/3] overflow-hidden rounded-2xl relative bg-gray-800">
               <Image
                 src={imageError.success 
-                  ? "/images/fallback-success.jpg" 
-                  : "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200"}
+                  ? "/images/fallback-success.svg" 
+                  : "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200"}
                 alt="Success Stories"
                 fill
                 className="object-cover transition duration-300 group-hover:scale-105"
@@ -169,7 +169,7 @@ export default function Home() {
               <Image
                 src={imageError.coding 
                   ? "/images/fallback-featured-1.svg" 
-                  : "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"}
+                  : "https://images.unsplash.com/photo-1520989441361-575a56b57074?q=80&w=1200"}
                 alt="Student Coding"
                 fill
                 className="object-cover"
@@ -213,7 +213,7 @@ export default function Home() {
               <Image
                 src={imageError.teaching 
                   ? "/images/fallback-featured-2.svg" 
-                  : "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200"}
+                  : "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1200"}
                 alt="Teacher and Student"
                 fill
                 className="object-cover"
