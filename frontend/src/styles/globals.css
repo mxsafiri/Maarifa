@@ -3,44 +3,55 @@
 @tailwind utilities;
 
 :root {
-  --background: #0F1117;
-  --card-background: #1A1D24;
-  --card-hover: #22252D;
-  --primary: #6D28D9;
-  --primary-hover: #5B21B6;
-  --success: #22C55E;
-  --warning: #F59E0B;
-  --danger: #EF4444;
-  --text-primary: #FFFFFF;
-  --text-secondary: #94A3B8;
-  --border-color: #2D3748;
+  --background: #ffffff;
+  --card-background: #ffffff;
+  --card-hover: #f8fafc;
+  --primary: #0ea5e9;
+  --primary-hover: #0284c7;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --border-color: #e5e7eb;
+}
+
+.dark {
+  --background: #0f172a;
+  --card-background: #1e293b;
+  --card-hover: #334155;
+  --primary: #38bdf8;
+  --primary-hover: #0ea5e9;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
 }
 
 @layer base {
   html {
-    @apply bg-background text-white antialiased;
+    @apply bg-background text-text-primary antialiased;
   }
 
   body {
-    @apply min-h-screen bg-[#0F1117] text-white;
+    @apply min-h-screen bg-background text-text-primary antialiased;
   }
 
   h1 {
-    @apply text-4xl font-bold tracking-tight;
+    @apply text-4xl font-bold tracking-tight text-text-primary;
   }
 
   h2 {
-    @apply text-2xl font-semibold;
+    @apply text-2xl font-semibold text-text-primary;
   }
 
   h3 {
-    @apply text-xl font-semibold;
+    @apply text-xl font-semibold text-text-primary;
   }
 }
 
 @layer components {
   .card {
-    @apply rounded-lg border border-border bg-card-bg p-6 shadow-lg transition-all duration-200;
+    @apply rounded-xl border border-border bg-card-bg p-6 shadow-sm transition-all duration-200 hover:border-primary hover:shadow-md dark:bg-card-bg dark:hover:border-primary;
   }
 
   .card:hover {
@@ -52,7 +63,7 @@
   }
 
   .button-secondary {
-    @apply rounded-lg border border-border bg-card-bg px-4 py-2 font-semibold text-white transition-colors hover:bg-card-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
+    @apply rounded-lg border border-border bg-card-bg px-4 py-2 font-semibold text-text-primary transition-colors hover:bg-card-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
   }
 
   .nav-link {

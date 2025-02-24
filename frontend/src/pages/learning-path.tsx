@@ -1,202 +1,200 @@
-import Layout from '@/components/layout/Layout'
 import { motion } from 'framer-motion'
+import Layout from '@/components/layout/Layout'
 import {
   AcademicCapIcon,
   BeakerIcon,
+  ChartBarIcon,
   CodeBracketIcon,
+  LightBulbIcon,
   RocketLaunchIcon,
-  CheckCircleIcon,
-  ArrowRightIcon,
 } from '@heroicons/react/24/outline'
 
-const paths = [
+const currentPaths = [
   {
     id: 1,
-    title: 'Computer Science Fundamentals',
-    description: 'Master the core concepts of computer science and programming',
-    icon: CodeBracketIcon,
-    color: 'from-blue-500 to-cyan-500',
-    progress: 75,
-    modules: [
-      { name: 'Introduction to Programming', completed: true },
-      { name: 'Data Structures', completed: true },
-      { name: 'Algorithms', completed: true },
-      { name: 'Software Design', completed: false },
-    ],
+    name: 'AI & Machine Learning',
+    progress: 65,
+    completed: 13,
+    total: 20,
+    icon: BeakerIcon,
+    color: 'from-purple-500 to-indigo-500',
   },
   {
     id: 2,
-    title: 'Artificial Intelligence',
-    description: 'Explore the fascinating world of AI and machine learning',
-    icon: BeakerIcon,
-    color: 'from-purple-500 to-indigo-500',
-    progress: 45,
-    modules: [
-      { name: 'Machine Learning Basics', completed: true },
-      { name: 'Neural Networks', completed: true },
-      { name: 'Deep Learning', completed: false },
-      { name: 'AI Ethics', completed: false },
-    ],
+    name: 'Web Development',
+    progress: 80,
+    completed: 16,
+    total: 20,
+    icon: CodeBracketIcon,
+    color: 'from-blue-500 to-cyan-500',
   },
   {
     id: 3,
-    title: 'Web Development',
-    description: 'Build modern web applications from front to back',
-    icon: RocketLaunchIcon,
+    name: 'Data Science',
+    progress: 45,
+    completed: 9,
+    total: 20,
+    icon: ChartBarIcon,
     color: 'from-green-500 to-emerald-500',
-    progress: 90,
-    modules: [
-      { name: 'HTML & CSS', completed: true },
-      { name: 'JavaScript', completed: true },
-      { name: 'React & Next.js', completed: true },
-      { name: 'Backend Development', completed: false },
-    ],
   },
 ]
 
-const recommendations = [
+const recommendedPaths = [
   {
     id: 1,
-    title: 'Advanced Machine Learning',
-    description: 'Take your AI knowledge to the next level',
-    icon: BeakerIcon,
-    color: 'from-orange-500 to-pink-500',
+    name: 'Cloud Architecture',
+    description: 'Master cloud infrastructure and deployment',
     duration: '12 weeks',
     level: 'Advanced',
+    students: '2.5k+',
+    icon: RocketLaunchIcon,
   },
   {
     id: 2,
-    title: 'Cloud Computing',
-    description: 'Master modern cloud infrastructure',
-    icon: AcademicCapIcon,
-    color: 'from-yellow-500 to-orange-500',
-    duration: '8 weeks',
+    name: 'Blockchain Development',
+    description: 'Build decentralized applications and smart contracts',
+    duration: '10 weeks',
     level: 'Intermediate',
+    students: '1.8k+',
+    icon: LightBulbIcon,
+  },
+  {
+    id: 3,
+    name: 'DevOps Engineering',
+    description: 'Learn CI/CD, containerization, and automation',
+    duration: '14 weeks',
+    level: 'Advanced',
+    students: '3k+',
+    icon: AcademicCapIcon,
   },
 ]
 
 export default function LearningPath() {
   return (
     <Layout>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="space-y-12">
         {/* Header */}
-        <div className="py-24 text-center">
+        <div>
           <motion.h1
-            className="text-5xl font-semibold tracking-tight sm:text-6xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-semibold text-gray-900 dark:text-white"
           >
             Your Learning Journey
           </motion.h1>
           <motion.p
-            className="mx-auto mt-6 max-w-2xl text-xl text-gray-400"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mt-2 text-gray-600 dark:text-gray-400"
           >
-            Track your progress and discover new opportunities to grow your skills.
+            Track your progress and discover new learning paths tailored for you.
           </motion.p>
         </div>
 
-        {/* Current Paths */}
-        <motion.div
-          className="space-y-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <h2 className="text-3xl font-semibold">Current Learning Paths</h2>
-          <div className="grid gap-8 lg:grid-cols-2">
-            {paths.map((path) => (
-              <div
+        {/* Current Learning Paths */}
+        <section>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+          >
+            Current Learning Paths
+          </motion.h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {currentPaths.map((path, index) => (
+              <motion.div
                 key={path.id}
-                className="group relative overflow-hidden rounded-3xl bg-gray-50 p-8 dark:bg-gray-800/50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                className="group overflow-hidden rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-900/5 transition-all hover:shadow-md dark:bg-gray-800 dark:ring-gray-800"
               >
-                <div className="flex items-center justify-between">
-                  <div className={`rounded-xl bg-gradient-to-br ${path.color} p-2 opacity-80`}>
+                <div className="flex items-center gap-4">
+                  <div
+                    className={`rounded-xl bg-gradient-to-br ${path.color} p-3`}
+                  >
                     <path.icon className="h-6 w-6 text-white" />
                   </div>
-                  <span className="text-lg font-semibold">{path.progress}%</span>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {path.name}
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                      {path.completed} of {path.total} modules completed
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mt-6 text-2xl font-semibold">{path.title}</h3>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">
-                  {path.description}
-                </p>
-                <div className="mt-6 space-y-3">
-                  {path.modules.map((module, index) => (
+                <div className="mt-6">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600 dark:text-gray-400">
+                      Progress
+                    </span>
+                    <span className="font-medium text-gray-900 dark:text-white">
+                      {path.progress}%
+                    </span>
+                  </div>
+                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
                     <div
-                      key={index}
-                      className="flex items-center space-x-3 text-sm"
-                    >
-                      <CheckCircleIcon
-                        className={`h-5 w-5 ${
-                          module.completed
-                            ? 'text-green-500'
-                            : 'text-gray-300 dark:text-gray-600'
-                        }`}
-                      />
-                      <span
-                        className={
-                          module.completed
-                            ? ''
-                            : 'text-gray-400 dark:text-gray-500'
-                        }
-                      >
-                        {module.name}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-8">
-                  <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700">
-                    <div
-                      className={`h-2 rounded-full bg-gradient-to-r ${path.color}`}
+                      className={`h-full rounded-full bg-gradient-to-r ${path.color}`}
                       style={{ width: `${path.progress}%` }}
                     />
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </motion.div>
+        </section>
 
         {/* Recommended Paths */}
-        <motion.div
-          className="mt-24 space-y-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <h2 className="text-3xl font-semibold">Recommended for You</h2>
-          <div className="grid gap-8 sm:grid-cols-2">
-            {recommendations.map((item) => (
-              <div
-                key={item.id}
-                className="group relative overflow-hidden rounded-3xl bg-gray-50 p-8 dark:bg-gray-800/50"
+        <section>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+          >
+            Recommended for You
+          </motion.h2>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {recommendedPaths.map((path, index) => (
+              <motion.div
+                key={path.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                className="group overflow-hidden rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-900/5 transition-all hover:shadow-md dark:bg-gray-800 dark:ring-gray-800"
               >
-                <div className={`rounded-xl bg-gradient-to-br ${item.color} p-2 opacity-80`}>
-                  <item.icon className="h-6 w-6 text-white" />
+                <div className="flex items-center gap-4">
+                  <div className="rounded-xl bg-primary-50 p-3 dark:bg-primary-900/20">
+                    <path.icon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {path.name}
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                      {path.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mt-6 text-2xl font-semibold">{item.title}</h3>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">
-                  {item.description}
-                </p>
-                <div className="mt-6 flex items-center space-x-4 text-sm text-gray-500">
-                  <span>{item.duration}</span>
-                  <span>•</span>
-                  <span>{item.level}</span>
+                <div className="mt-6 flex flex-wrap gap-4">
+                  <span className="inline-flex items-center rounded-full bg-primary-50 px-2 py-1 text-xs font-medium text-primary-700 ring-1 ring-inset ring-primary-700/10 dark:bg-primary-900/20 dark:text-primary-400 dark:ring-primary-400/20">
+                    {path.duration}
+                  </span>
+                  <span className="inline-flex items-center rounded-full bg-primary-50 px-2 py-1 text-xs font-medium text-primary-700 ring-1 ring-inset ring-primary-700/10 dark:bg-primary-900/20 dark:text-primary-400 dark:ring-primary-400/20">
+                    {path.level}
+                  </span>
+                  <span className="inline-flex items-center rounded-full bg-primary-50 px-2 py-1 text-xs font-medium text-primary-700 ring-1 ring-inset ring-primary-700/10 dark:bg-primary-900/20 dark:text-primary-400 dark:ring-primary-400/20">
+                    {path.students} students
+                  </span>
                 </div>
-                <a
-                  href={`/path/${item.id}`}
-                  className="mt-8 inline-flex items-center text-primary hover:underline"
-                >
-                  Start learning <ArrowRightIcon className="ml-2 h-4 w-4" />
-                </a>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </motion.div>
+        </section>
       </div>
     </Layout>
   )
