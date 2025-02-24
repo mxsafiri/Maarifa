@@ -8,6 +8,8 @@ import {
   CodeBracketIcon,
   GlobeAltIcon,
   ChartBarIcon,
+  ClockIcon,
+  UsersIcon,
 } from '@heroicons/react/24/outline'
 
 const categories = [
