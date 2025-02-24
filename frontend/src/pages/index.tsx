@@ -168,7 +168,7 @@ export default function Home() {
             <div className="relative overflow-hidden rounded-3xl aspect-[4/3] lg:aspect-[16/9] bg-gray-800">
               <Image
                 src={imageError.coding 
-                  ? "/images/fallback-coding.jpg" 
+                  ? "/images/fallback-featured-1.svg" 
                   : "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"}
                 alt="Student Coding"
                 fill
@@ -212,7 +212,7 @@ export default function Home() {
             <div className="relative overflow-hidden rounded-3xl aspect-[4/3] lg:aspect-[16/9] lg:order-1 bg-gray-800">
               <Image
                 src={imageError.teaching 
-                  ? "/images/fallback-teaching.jpg" 
+                  ? "/images/fallback-featured-2.svg" 
                   : "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200"}
                 alt="Teacher and Student"
                 fill
