@@ -1,30 +1,66 @@
-# Maarifa AI 🎓
+# Maarifa - Olympic Values Education Platform 🎓
 www.nedalabs.xyz
 
 ## About
-Maarifa AI is an AI-powered educational platform that delivers personalized learning experiences, mentorship, and coaching for parents, teachers, and students.
+Maarifa is an innovative educational platform focused on delivering Olympic values education through personalized learning experiences. The platform combines modern technology with Olympic principles to create engaging, interactive content for learners worldwide.
 
-## Features
-- 🤖 AI-Powered Learning & Personalization
-- 📚 Content Library & Knowledge Delivery
-- 🎮 Gamification & Engagement
-- 📊 User Dashboard & Progress Tracking
-- 🎨 Modern UI/UX
-- 💼 Enterprise Solutions
+## Core Features
+
+### 📊 Interactive Dashboard
+- Quick actions for common tasks
+- Personalized recommendations
+- Activity overview and insights
+- Modern, responsive design
+
+### 📚 Resource Library
+- Comprehensive educational materials
+- Advanced search and filtering
+- Downloadable resources
+- Bookmarking system
+
+### 📈 Progress Tracking
+- Detailed progress monitoring
+- Performance analytics
+- Achievement tracking
+- Custom goals and milestones
+
+### 🛣️ Learning Paths
+- Structured learning journeys
+- Module-based progression
+- Prerequisites and skill tracking
+- Interactive completion status
+
+### 🎯 Personalized Activities
+- AI-powered recommendations
+- Customized learning experiences
+- Activity matching based on preferences
+- Multiple learning styles support
+
+### 📝 Content Management
+- Rich text editing
+- Media management
+- Content organization
+- Publishing workflow
+- Bulk upload capabilities
 
 ## Tech Stack
-- Frontend: React.js/Next.js
+- Frontend: Next.js with TypeScript
+- UI: Tailwind CSS & Framer Motion
 - Backend: FastAPI (Python)
 - Database: PostgreSQL
-- AI Integration: OpenAI API / Hugging Face
 - Authentication: JWT
+- Hosting: Vercel
 
 ## Project Structure
 ```
 maarifa/
-├── frontend/          # React.js frontend application
-├── backend/           # FastAPI backend application
-└── docs/             # Documentation
+├── frontend/          # Next.js frontend application
+│   ├── src/
+│   │   ├── pages/    # Application pages
+│   │   ├── components/# Reusable components
+│   │   └── styles/   # Global styles
+├── backend/          # FastAPI backend application
+└── docs/            # Documentation
 ```
 
 ## Getting Started
@@ -46,10 +82,23 @@ pip install -r requirements.txt
 ```bash
 cd frontend
 npm install
+npm run dev
 ```
 
+## Development
+- The application uses TypeScript for type safety
+- Tailwind CSS for styling
+- Framer Motion for animations
+- Component-based architecture
+- Responsive design with dark mode support
+
 ## Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions! Please follow these steps:
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to your branch
+5. Create a Pull Request
 
 ## License
 [MIT License](LICENSE)

@@ -1,235 +1,267 @@
-import Layout from '@/components/layout/Layout'
 import { motion } from 'framer-motion'
+import AppLayout from '@/components/layout/AppLayout'
 import {
   ChartBarIcon,
   ClockIcon,
+  TrendingUpIcon,
   AcademicCapIcon,
-  TrophyIcon,
-  RocketLaunchIcon,
-  FireIcon,
-  BookOpenIcon,
-} from '@heroicons/react/24/outline'
+  UserGroupIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  CalendarIcon,
+} from '@heroicons/react/outline'
+import { useState } from 'react'
 
-const achievements = [
-  {
-    id: 1,
-    name: 'Quick Learner',
-    description: 'Completed 5 courses in one month',
-    icon: RocketLaunchIcon,
-    color: 'from-purple-500 to-indigo-500',
-    earned: true,
-  },
-  {
-    id: 2,
-    name: 'Coding Master',
-    description: 'Achieved 100% in all coding challenges',
-    icon: TrophyIcon,
-    color: 'from-yellow-500 to-orange-500',
-    earned: true,
-  },
-  {
-    id: 3,
-    name: 'Consistent Learner',
-    description: '30-day learning streak',
-    icon: FireIcon,
-    color: 'from-red-500 to-pink-500',
-    earned: false,
-  },
-]
+interface ProgressData {
+  id: string
+  student: string
+  course: string
+  progress: number
+  lastActivity: string
+  timeSpent: string
+  status: 'completed' | 'in-progress' | 'not-started'
+  score: number
+}
 
-const courses = [
+const progressData: ProgressData[] = [
   {
-    id: 1,
-    name: 'Python Programming',
+    id: '1',
+    student: 'Alex Johnson',
+    course: 'Olympic Values and Ethics',
     progress: 85,
-    totalLessons: 24,
-    completedLessons: 20,
-    timeSpent: '45h 30m',
-    color: 'from-blue-500 to-cyan-500',
+    lastActivity: '2 hours ago',
+    timeSpent: '12h 30m',
+    status: 'in-progress',
+    score: 92,
   },
   {
-    id: 2,
-    name: 'Machine Learning Basics',
-    progress: 60,
-    totalLessons: 32,
-    completedLessons: 19,
-    timeSpent: '28h 15m',
-    color: 'from-purple-500 to-indigo-500',
+    id: '2',
+    student: 'Maria Garcia',
+    course: 'Sports Leadership',
+    progress: 100,
+    lastActivity: '1 day ago',
+    timeSpent: '15h 45m',
+    status: 'completed',
+    score: 95,
   },
-  {
-    id: 3,
-    name: 'Web Development',
-    progress: 40,
-    totalLessons: 40,
-    completedLessons: 16,
-    timeSpent: '20h 45m',
-    color: 'from-green-500 to-emerald-500',
-  },
+  // Add more progress data as needed
 ]
 
 const stats = [
   {
-    name: 'Total Learning Hours',
-    value: '94.5',
-    icon: ClockIcon,
-    color: 'from-blue-500 to-cyan-500',
-  },
-  {
-    name: 'Course Completion Rate',
-    value: '85%',
+    name: 'Average Progress',
+    value: '78%',
     icon: ChartBarIcon,
-    color: 'from-green-500 to-emerald-500',
+    change: '+12%',
+    changeType: 'positive',
   },
   {
-    name: 'Current Level',
-    value: 'Advanced',
-    icon: AcademicCapIcon,
-    color: 'from-purple-500 to-indigo-500',
+    name: 'Active Students',
+    value: '156',
+    icon: UserGroupIcon,
+    change: '+23',
+    changeType: 'positive',
+  },
+  {
+    name: 'Completion Rate',
+    value: '92%',
+    icon: CheckCircleIcon,
+    change: '+5%',
+    changeType: 'positive',
+  },
+  {
+    name: 'Avg. Time per Course',
+    value: '14h',
+    icon: ClockIcon,
+    change: '-2h',
+    changeType: 'negative',
   },
 ]
 
 export default function Progress() {
-  return (
-    <Layout>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 dark:bg-gray-900">
-        {/* Header */}
-        <div className="py-8">
-          <motion.h1 
-            className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Your Learning Progress
-          </motion.h1>
-          <motion.p
-            className="mt-2 text-lg text-gray-500 dark:text-gray-400"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            Track your achievements and course progress
-          </motion.p>
-        </div>
+  const [selectedStatus, setSelectedStatus] = useState<string>('all')
+  const [sortBy, setSortBy] = useState<string>('progress')
 
-        {/* Stats Overview */}
-        <section className="py-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {stats.map((stat, index) => (
+  const filteredData = progressData
+    .filter((item) => selectedStatus === 'all' || item.status === selectedStatus)
+    .sort((a, b) => {
+      if (sortBy === 'progress') return b.progress - a.progress
+      if (sortBy === 'score') return b.score - a.score
+      return 0
+    })
+
+  return (
+    <AppLayout>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="py-8"
+        >
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Progress Tracking</h1>
+            <button className="rounded-md bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700">
+              Export Report
+            </button>
+          </div>
+
+          {/* Stats Grid */}
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat) => (
               <motion.div
                 key={stat.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                whileHover={{ scale: 1.02 }}
+                className="overflow-hidden rounded-lg bg-white p-6 shadow dark:bg-gray-800"
               >
-                <div className={`absolute inset-0 opacity-10 bg-gradient-to-br ${stat.color}`} />
-                <div className="relative flex items-center space-x-4">
-                  <stat.icon className={`h-10 w-10 bg-gradient-to-br ${stat.color} rounded-xl p-2 text-white`} />
-                  <div>
+                <div className="flex items-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-100 dark:bg-primary-900">
+                    <stat.icon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
+                  </div>
+                  <div className="ml-4">
                     <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{stat.name}</p>
-                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">{stat.value}</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">
+                      {stat.value}
+                    </p>
                   </div>
+                </div>
+                <div className="mt-4">
+                  <div
+                    className={`inline-flex items-center text-sm ${
+                      stat.changeType === 'positive'
+                        ? 'text-green-600 dark:text-green-400'
+                        : 'text-red-600 dark:text-red-400'
+                    }`}
+                  >
+                    {stat.changeType === 'positive' ? (
+                      <TrendingUpIcon className="mr-1.5 h-4 w-4" />
+                    ) : (
+                      <ExclamationCircleIcon className="mr-1.5 h-4 w-4" />
+                    )}
+                    {stat.change}
+                  </div>
+                  <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">vs last month</span>
                 </div>
               </motion.div>
             ))}
           </div>
-        </section>
 
-        {/* Course Progress */}
-        <section className="py-8">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Active Courses</h2>
-          <div className="space-y-6">
-            {courses.map((course, index) => (
-              <motion.div
-                key={course.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-6 shadow-lg"
+          {/* Filters and Sort */}
+          <div className="mt-8 flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <select
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+                className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
               >
-                <div className={`absolute inset-0 opacity-5 bg-gradient-to-br ${course.color}`} />
-                <div className="relative">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{course.name}</h3>
-                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                      {course.completedLessons}/{course.totalLessons} lessons
-                    </span>
-                  </div>
-                  <div className="relative pt-1">
-                    <div className="flex mb-2 items-center justify-between">
-                      <div>
-                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
-                          {course.progress}% Complete
-                        </span>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-                          {course.timeSpent} spent
-                        </span>
-                      </div>
-                    </div>
-                    <div className="overflow-hidden h-2 mb-4 text-xs flex rounded-full bg-gray-100 dark:bg-gray-700">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${course.progress}%` }}
-                        transition={{ duration: 1, delay: index * 0.2 }}
-                        className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r ${course.color}`}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                <option value="all">All Status</option>
+                <option value="completed">Completed</option>
+                <option value="in-progress">In Progress</option>
+                <option value="not-started">Not Started</option>
+              </select>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
+              >
+                <option value="progress">Sort by Progress</option>
+                <option value="score">Sort by Score</option>
+              </select>
+            </div>
           </div>
-        </section>
 
-        {/* Achievements */}
-        <section className="py-8">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Recent Achievements</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {achievements.map((achievement, index) => (
-              <motion.div
-                key={achievement.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative overflow-hidden rounded-2xl p-6 ${
-                  achievement.earned 
-                    ? 'bg-white dark:bg-gray-800' 
-                    : 'bg-gray-50 dark:bg-gray-800/50'
-                } shadow-lg`}
-              >
-                <div className={`absolute inset-0 opacity-10 bg-gradient-to-br ${achievement.color}`} />
-                <div className="relative flex flex-col items-start">
-                  <achievement.icon className={`h-8 w-8 bg-gradient-to-br ${achievement.color} rounded-lg p-1.5 text-white ${
-                    !achievement.earned && 'opacity-50'
-                  }`} />
-                  <h3 className={`mt-4 text-lg font-semibold ${
-                    achievement.earned 
-                      ? 'text-gray-900 dark:text-white' 
-                      : 'text-gray-500 dark:text-gray-400'
-                  }`}>
-                    {achievement.name}
-                  </h3>
-                  <p className={`mt-2 text-sm ${
-                    achievement.earned 
-                      ? 'text-gray-500 dark:text-gray-400' 
-                      : 'text-gray-400 dark:text-gray-500'
-                  }`}>
-                    {achievement.description}
-                  </p>
-                  {!achievement.earned && (
-                    <span className="mt-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                      In Progress
-                    </span>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+          {/* Progress Table */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-8 overflow-hidden rounded-lg bg-white shadow dark:bg-gray-800"
+          >
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead className="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    Student
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    Course
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    Progress
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    Score
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    Last Activity
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    Time Spent
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
+                {filteredData.map((item) => (
+                  <motion.tr
+                    key={item.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    whileHover={{ backgroundColor: 'rgba(243, 244, 246, 0.1)' }}
+                  >
+                    <td className="whitespace-nowrap px-6 py-4">
+                      <div className="flex items-center">
+                        <div className="h-10 w-10 flex-shrink-0">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900">
+                            <span className="text-sm font-medium text-primary-600 dark:text-primary-400">
+                              {item.student.split(' ').map((n) => n[0]).join('')}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="ml-4">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                            {item.student}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      <div className="text-sm text-gray-900 dark:text-white">{item.course}</div>
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      <div className="w-full">
+                        <div className="relative pt-1">
+                          <div className="h-2 overflow-hidden rounded bg-gray-200 dark:bg-gray-700">
+                            <motion.div
+                              className="h-2 rounded bg-primary-600"
+                              initial={{ width: 0 }}
+                              animate={{ width: `${item.progress}%` }}
+                              transition={{ duration: 1, ease: 'easeOut' }}
+                            />
+                          </div>
+                          <div className="mt-1 text-right text-xs font-semibold text-gray-600 dark:text-gray-400">
+                            {item.progress}%
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      <div className="text-sm text-gray-900 dark:text-white">{item.score}%</div>
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      <div className="text-sm text-gray-500 dark:text-gray-400">
+                        {item.lastActivity}
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{item.timeSpent}</div>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </motion.div>
+        </motion.div>
       </div>
-    </Layout>
+    </AppLayout>
   )
 }

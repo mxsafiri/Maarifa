@@ -1,204 +1,249 @@
 import { motion } from 'framer-motion'
-import Layout from '@/components/layout/Layout'
+import AppLayout from '@/components/layout/AppLayout'
 import {
-  BeakerIcon,
-  BookOpenIcon,
-  ClockIcon,
-  CodeBracketIcon,
-  GlobeAltIcon,
-  ChartBarIcon,
-  UsersIcon,
-} from '@heroicons/react/24/outline'
+  SearchIcon,
+  FilterIcon,
+  DocumentDownloadIcon,
+  BookmarkIcon,
+  ShareIcon,
+  DocumentDuplicateIcon,
+  TagIcon,
+  CollectionIcon,
+} from '@heroicons/react/outline'
+import { useState } from 'react'
 
-const categories = [
+interface Resource {
+  id: string
+  title: string
+  description: string
+  type: string
+  category: string
+  tags: string[]
+  downloadCount: number
+  fileSize: string
+  lastUpdated: string
+}
+
+const resources: Resource[] = [
   {
-    name: 'Computer Science',
-    description: 'Programming, algorithms, and software engineering',
-    icon: CodeBracketIcon,
-    courses: 45,
-    color: 'from-blue-500 to-cyan-500',
+    id: '1',
+    title: 'Olympic Values Education Guide',
+    description: 'Comprehensive guide for teaching Olympic values through interactive activities',
+    type: 'PDF',
+    category: 'Teaching Guide',
+    tags: ['Olympic Values', 'Education', 'Activities'],
+    downloadCount: 1234,
+    fileSize: '2.5 MB',
+    lastUpdated: '2025-02-20',
   },
   {
-    name: 'Data Science',
-    description: 'Statistics, machine learning, and data visualization',
-    icon: ChartBarIcon,
-    courses: 38,
-    color: 'from-green-500 to-emerald-500',
+    id: '2',
+    title: 'Sport Ethics Workshop Materials',
+    description: 'Workshop materials for teaching ethics in sport to young athletes',
+    type: 'ZIP',
+    category: 'Workshop',
+    tags: ['Ethics', 'Sport', 'Workshop'],
+    downloadCount: 856,
+    fileSize: '15 MB',
+    lastUpdated: '2025-02-18',
   },
-  {
-    name: 'Artificial Intelligence',
-    description: 'Machine learning, neural networks, and deep learning',
-    icon: BeakerIcon,
-    courses: 32,
-    color: 'from-purple-500 to-indigo-500',
-  },
-  {
-    name: 'Web Development',
-    description: 'Frontend, backend, and full-stack development',
-    icon: GlobeAltIcon,
-    courses: 56,
-    color: 'from-pink-500 to-rose-500',
-  },
+  // Add more resources as needed
 ]
 
-const featuredCourses = [
-  {
-    id: 1,
-    title: 'Machine Learning Fundamentals',
-    category: 'Artificial Intelligence',
-    duration: '8 weeks',
-    level: 'Intermediate',
-    students: '2.5k+',
-    instructor: 'Dr. Sarah Johnson',
-    rating: 4.8,
-    image: '/images/courses/ml-fundamentals.jpg',
-  },
-  {
-    id: 2,
-    title: 'Full-Stack Web Development',
-    category: 'Web Development',
-    duration: '12 weeks',
-    level: 'Advanced',
-    students: '3k+',
-    instructor: 'Alex Chen',
-    rating: 4.9,
-    image: '/images/courses/web-dev.jpg',
-  },
-  {
-    id: 3,
-    title: 'Data Science Essentials',
-    category: 'Data Science',
-    duration: '10 weeks',
-    level: 'Beginner',
-    students: '1.8k+',
-    instructor: 'Dr. Michael Brown',
-    rating: 4.7,
-    image: '/images/courses/data-science.jpg',
-  },
+const categories = [
+  'Teaching Guide',
+  'Workshop',
+  'Video',
+  'Presentation',
+  'Activity Sheet',
+  'Research Paper',
+]
+
+const tags = [
+  'Olympic Values',
+  'Education',
+  'Activities',
+  'Ethics',
+  'Sport',
+  'Workshop',
+  'Youth',
+  'Leadership',
 ]
 
 export default function Library() {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
+
+  const filteredResources = resources.filter((resource) => {
+    const matchesSearch = resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      resource.description.toLowerCase().includes(searchQuery.toLowerCase())
+    
+    const matchesCategories = selectedCategories.length === 0 ||
+      selectedCategories.includes(resource.category)
+    
+    const matchesTags = selectedTags.length === 0 ||
+      resource.tags.some(tag => selectedTags.includes(tag))
+    
+    return matchesSearch && matchesCategories && matchesTags
+  })
+
   return (
-    <Layout>
-      <div className="space-y-12">
-        {/* Header */}
-        <div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl font-semibold text-gray-900 dark:text-white"
-          >
-            Course Library
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-2 text-gray-600 dark:text-gray-400"
-          >
-            Explore our comprehensive collection of courses and start learning
-            today.
-          </motion.p>
-        </div>
+    <AppLayout>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="py-8"
+        >
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Resource Library</h1>
+            <button className="rounded-md bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700">
+              Upload Resource
+            </button>
+          </div>
 
-        {/* Categories */}
-        <section>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-          >
-            Browse by Category
-          </motion.h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((category, index) => (
-              <motion.div
-                key={category.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                className="group overflow-hidden rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-900/5 transition-all hover:shadow-md dark:bg-gray-800 dark:ring-gray-800"
-              >
-                <div className="flex items-center gap-4">
-                  <div
-                    className={`rounded-xl bg-gradient-to-br ${category.color} p-3`}
+          <div className="mt-6 grid grid-cols-12 gap-6">
+            {/* Filters Sidebar */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="col-span-3 space-y-6"
+            >
+              {/* Search */}
+              <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+                <div className="relative">
+                  <SearchIcon className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search resources..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+                  />
+                </div>
+              </div>
+
+              {/* Categories */}
+              <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+                <h3 className="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                  <CollectionIcon className="mr-2 h-5 w-5 text-gray-500" />
+                  Categories
+                </h3>
+                <div className="mt-4 space-y-2">
+                  {categories.map((category) => (
+                    <label key={category} className="flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={selectedCategories.includes(category)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedCategories([...selectedCategories, category])
+                          } else {
+                            setSelectedCategories(selectedCategories.filter(c => c !== category))
+                          }
+                        }}
+                        className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500 dark:border-gray-600"
+                      />
+                      <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">{category}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tags */}
+              <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+                <h3 className="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                  <TagIcon className="mr-2 h-5 w-5 text-gray-500" />
+                  Tags
+                </h3>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {tags.map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => {
+                        if (selectedTags.includes(tag)) {
+                          setSelectedTags(selectedTags.filter(t => t !== tag))
+                        } else {
+                          setSelectedTags([...selectedTags, tag])
+                        }
+                      }}
+                      className={`rounded-full px-3 py-1 text-xs font-medium ${
+                        selectedTags.includes(tag)
+                          ? 'bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                      }`}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Resources Grid */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="col-span-9"
+            >
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {filteredResources.map((resource) => (
+                  <motion.div
+                    key={resource.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    whileHover={{ scale: 1.02 }}
+                    className="overflow-hidden rounded-lg bg-white shadow transition-all hover:shadow-lg dark:bg-gray-800"
                   >
-                    <category.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {category.name}
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                      {category.courses} courses
-                    </p>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-                  {category.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* Featured Courses */}
-        <section>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-          >
-            Featured Courses
-          </motion.h2>
-          <div className="grid gap-6 lg:grid-cols-3">
-            {featuredCourses.map((course, index) => (
-              <motion.div
-                key={course.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                className="group overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-gray-900/5 transition-all hover:shadow-md dark:bg-gray-800 dark:ring-gray-800"
-              >
-                <div className="aspect-w-16 aspect-h-9 relative">
-                  <div className="absolute inset-0 bg-gray-100 dark:bg-gray-700">
-                    {/* Course image would go here */}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    {course.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    by {course.instructor}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <span className="inline-flex items-center rounded-full bg-primary-50 px-2 py-1 text-xs font-medium text-primary-700 ring-1 ring-inset ring-primary-700/10 dark:bg-primary-900/20 dark:text-primary-400 dark:ring-primary-400/20">
-                      {course.category}
-                    </span>
-                    <span className="inline-flex items-center rounded-full bg-primary-50 px-2 py-1 text-xs font-medium text-primary-700 ring-1 ring-inset ring-primary-700/10 dark:bg-primary-900/20 dark:text-primary-400 dark:ring-primary-400/20">
-                      {course.level}
-                    </span>
-                  </div>
-                  <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-4 dark:border-gray-700">
-                    <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-                      <ClockIcon className="h-4 w-4" />
-                      <span>{course.duration}</span>
+                    <div className="p-6">
+                      <div className="flex items-center justify-between">
+                        <span className="inline-flex items-center rounded-full bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
+                          {resource.type}
+                        </span>
+                        <button className="text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400">
+                          <BookmarkIcon className="h-5 w-5" />
+                        </button>
+                      </div>
+                      <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-white">
+                        {resource.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                        {resource.description}
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {resource.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-6 flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <button className="flex items-center text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+                            <DocumentDownloadIcon className="mr-1.5 h-4 w-4" />
+                            {resource.downloadCount}
+                          </button>
+                          <button className="flex items-center text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+                            <ShareIcon className="mr-1.5 h-4 w-4" />
+                            Share
+                          </button>
+                        </div>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                          {resource.fileSize}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-                      <UsersIcon className="h-4 w-4" />
-                      <span>{course.students}</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.div>
       </div>
-    </Layout>
+    </AppLayout>
   )
 }

@@ -1,14 +1,11 @@
 import { motion } from 'framer-motion'
 import Head from 'next/head'
-import Hero from '@/components/ui/Hero'
+import ParallaxHero from '@/components/ui/ParallaxHero'
+import FeatureGrid from '@/components/ui/FeatureGrid'
+import FloatingNav from '@/components/navigation/FloatingNav'
 import Card from '@/components/ui/Card'
-import FeatureCard from '@/components/ui/FeatureCard'
-import {
-  AcademicCapIcon,
-  UserGroupIcon,
-  ChartBarIcon,
-  RocketLaunchIcon,
-} from '@heroicons/react/24/outline'
+import StatsSection from '@/components/sections/StatsSection'
+import TestimonialsSection from '@/components/sections/TestimonialsSection'
 
 export default function Home() {
   return (
@@ -21,14 +18,23 @@ export default function Home() {
         />
       </Head>
 
-      <Hero
-        title="Inspiring every kind of educator"
-        subtitle="Everyone has their own way of teaching and learning. Indaba AI empowers every kind of educator — and every kind of student — to learn, create, and define their own success through Olympic values."
-        image="/images/hero-teacher.jpg"
+      <ParallaxHero
+        title="Inspiring Olympic Values in Education"
+        subtitle="Transform your teaching with AI-powered Olympic education resources. Join educators worldwide in bringing Olympic values to life in your classroom."
+        image="/images/hero-olympics.jpg"
       />
 
-      <div className="py-24 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <FeatureGrid />
+
+      <StatsSection />
+
+      <div className="relative py-24">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-primary/5 to-transparent" />
+          <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-primary/5 to-transparent" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -36,7 +42,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-3xl font-display font-bold text-gray-900 dark:text-white sm:text-4xl"
             >
-              Empower your teaching journey
+              Start your Olympic journey
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -45,80 +51,41 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="mt-4 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-400"
             >
-              Access over 600 Olympic-themed activities and resources designed to inspire and educate
+              Choose your path and begin inspiring the next generation with Olympic values
             </motion.p>
           </div>
 
           <div className="mt-20">
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               <Card
-                title="K-12 Learning"
-                subtitle="Ignite the creativity in every student"
-                image="/images/k12-learning.jpg"
-                color="pink"
-                link="/k12"
-              />
-              <Card
-                title="Higher Education"
-                subtitle="Teach. Innovate. Inspire. Every which way."
-                image="/images/higher-ed.jpg"
-                color="green"
-                link="/higher-education"
-              />
-              <Card
-                title="Success Stories"
-                subtitle="See how educators are making a difference"
-                image="/images/success-stories.jpg"
+                title="For Teachers"
+                subtitle="Access lesson plans, activities, and resources designed for classroom implementation"
+                image="/images/teachers.jpg"
                 color="blue"
-                link="/success-stories"
+                link="/teachers"
+              />
+              <Card
+                title="For Students"
+                subtitle="Engage with interactive content and learn about Olympic values through fun activities"
+                image="/images/students.jpg"
+                color="green"
+                link="/students"
+              />
+              <Card
+                title="For Schools"
+                subtitle="Implement Olympic education programs across your entire institution"
+                image="/images/schools.jpg"
+                color="pink"
+                link="/schools"
               />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="py-24 bg-white dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            <FeatureCard
-              title="Activity Management"
-              description="Create, customize, and track Olympic-themed activities"
-              icon={<AcademicCapIcon className="w-6 h-6" />}
-              stats={[
-                { label: 'Activities', value: '600+' },
-                { label: 'Languages', value: '10+' },
-              ]}
-            />
-            <FeatureCard
-              title="Student Engagement"
-              description="Monitor progress and celebrate achievements"
-              icon={<UserGroupIcon className="w-6 h-6" />}
-              stats={[
-                { label: 'Students Reached', value: '12M+' },
-                { label: 'Avg. Engagement', value: '85%' },
-              ]}
-            />
-            <FeatureCard
-              title="Analytics Dashboard"
-              description="Track impact and measure learning outcomes"
-              icon={<ChartBarIcon className="w-6 h-6" />}
-              stats={[
-                { label: 'Data Points', value: '1M+' },
-                { label: 'Insights Generated', value: '50K+' },
-              ]}
-            />
-            <FeatureCard
-              title="Olympic Integration"
-              description="Connect with the global Olympic community"
-              icon={<RocketLaunchIcon className="w-6 h-6" />}
-              stats={[
-                { label: 'Countries', value: '60+' },
-                { label: 'Partners', value: '100+' },
-              ]}
-            />
-          </div>
-        </div>
-      </div>
+      <TestimonialsSection />
+
+      <FloatingNav />
     </>
   )
 }
