@@ -12,6 +12,9 @@ import {
 } from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import PageTransition from './PageTransition'
+import ThemeToggle from '../ThemeToggle'
+import { useTheme } from '@/context/ThemeContext'
 
 interface NavItem {
   name: string
@@ -31,9 +34,10 @@ const navigation: NavItem[] = [
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const router = useRouter()
+  const { theme } = useTheme()
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 transition-colors duration-300 dark:bg-gray-900">
       {/* Mobile sidebar */}
       <AnimatePresence>
         {sidebarOpen && (
@@ -142,11 +146,22 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        <main className="flex-1">
-          <div className="py-6">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
-          </div>
+        <main className="mx-auto max-w-7xl px-4 pb-12 pt-20 sm:px-6 lg:px-8">
+          <motion.div
+            initial={false}
+            animate={{
+              backgroundColor: theme === 'dark' ? 'rgb(17, 24, 39)' : 'rgb(255, 255, 255)',
+            }}
+            className="rounded-lg shadow-sm"
+          >
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </motion.div>
         </main>
+      </div>
+      <div className="fixed bottom-6 right-6">
+        <ThemeToggle />
       </div>
     </div>
   )
