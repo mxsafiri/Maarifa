@@ -5,7 +5,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        background: 'var(--background)',
+        'card-background': 'var(--card-background)',
+        'card-hover': 'var(--card-hover)',
         primary: {
+          DEFAULT: 'var(--primary)',
+          hover: 'var(--primary-hover)',
           50: '#f0f9ff',
           100: '#e0f2fe',
           200: '#bae6fd',
@@ -18,20 +23,28 @@ module.exports = {
           900: '#0c4a6e',
         },
         success: {
+          DEFAULT: 'var(--success)',
           50: '#ecfdf5',
           500: '#10b981',
           600: '#059669',
         },
         warning: {
+          DEFAULT: 'var(--warning)',
           50: '#fffbeb',
           500: '#f59e0b',
           600: '#d97706',
         },
         error: {
+          DEFAULT: 'var(--danger)',
           50: '#fef2f2',
           500: '#ef4444',
           600: '#dc2626',
         },
+        text: {
+          primary: 'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
+        },
+        border: 'var(--border-color)',
       },
       fontFamily: {
         sans: [
@@ -90,5 +103,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
 }
