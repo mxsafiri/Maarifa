@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion'
 import {
   BeakerIcon,
+  AcademicCapIcon,
   BookOpenIcon,
-  BoltIcon,
-  ChatBubbleBottomCenterTextIcon,
+  ChartBarIcon,
   UserGroupIcon,
-  TrophyIcon,
-} from '@heroicons/react/24/outline'
+  BadgeCheckIcon as TrophyIcon,
+  LightningBoltIcon as BoltIcon,
+  ChatIcon as ChatBubbleBottomCenterTextIcon,
+} from '@heroicons/react/outline'
 
 const features = [
   {

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { SunIcon, MoonIcon } from '@heroicons/react/24/outline'
+import { SunIcon, MoonIcon } from '@heroicons/react/outline'
 import { useTheme } from '@/context/ThemeContext'
 
 export default function ThemeToggle() {

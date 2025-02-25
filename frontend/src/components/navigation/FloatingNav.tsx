@@ -4,8 +4,8 @@ import {
   BookOpenIcon,
   ChartBarIcon,
   AcademicCapIcon,
-  UserCircleIcon,
-} from '@heroicons/react/24/outline'
+  UserIcon as UserCircleIcon,
+} from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 

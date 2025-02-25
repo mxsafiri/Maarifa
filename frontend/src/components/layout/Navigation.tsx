@@ -4,14 +4,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import {
   HomeIcon,
-  AcademicCapIcon,
   BookOpenIcon,
+  AcademicCapIcon,
   ChartBarIcon,
   UserGroupIcon,
-  Cog6ToothIcon,
-  XMarkIcon,
-  Bars3Icon,
-} from '@heroicons/react/24/outline'
+  DocumentTextIcon,
+  CogIcon,
+  MenuIcon as Bars3Icon,
+  XIcon as XMarkIcon,
+} from '@heroicons/react/outline'
 import ThemeToggle from '../ThemeToggle'
 
 const navigation = [
@@ -20,7 +21,7 @@ const navigation = [
   { name: 'Library', href: '/library', icon: BookOpenIcon },
   { name: 'Progress', href: '/progress', icon: ChartBarIcon },
   { name: 'Community', href: '/community', icon: UserGroupIcon },
-  { name: 'Settings', href: '/settings', icon: Cog6ToothIcon },
+  { name: 'Settings', href: '/settings', icon: CogIcon },
 ]
 
 export default function Navigation() {

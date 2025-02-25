@@ -1,14 +1,14 @@
 import Layout from '@/components/layout/Layout'
 import { motion } from 'framer-motion'
 import {
-  UserCircleIcon,
+  UserIcon as UserCircleIcon,
   AcademicCapIcon,
-  TrophyIcon,
+  BadgeCheckIcon as TrophyIcon,
   ChartBarIcon,
   CogIcon,
   BellIcon,
   ShieldCheckIcon,
-} from '@heroicons/react/24/outline'
+} from '@heroicons/react/outline'
 
 const achievements = [
   {
